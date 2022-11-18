@@ -26,7 +26,7 @@ def pre_main(args):
     pipline = PipelineController("Tmp-pipeline", "Tmp-pipeline1", version="0.0.1")
 
     with open("tmp_1/docker_setup_script.sh", "r") as f:
-        s1_docker_setup_script = f.read().split("\n")
+        s1_docker_setup_script = f.read()
     pipline.add_function_step(
         "Some_1",
         some_op,
@@ -50,7 +50,7 @@ def pre_main(args):
     )
 
     with open("tmp_2/docker_setup_script.sh", "r") as f:
-        s2_docker_setup_script = f.read().split("\n")
+        s2_docker_setup_script = f.read()
     pipline.add_function_step(
         "Some_2",
         some_op_1,
