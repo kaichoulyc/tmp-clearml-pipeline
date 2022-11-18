@@ -2,8 +2,23 @@ import argparse
 
 from clearml import PipelineController
 
-from tmp_1.perform import some_op
-from tmp_2.perform import some_op_1
+def some_op(a, b, c):
+    import torch
+    from utils import add
+    a = torch.tensor(a).cuda()
+    b = torch.tensor(b).cuda()
+    c = torch.tensor(c).cuda()
+    return {"value": int(torch.pow(add(a, b), c).item())}
+
+
+def some_op_1(a, b, previous_output):
+    import torch
+    from utils import add
+    a = torch.tensor(a).cuda()
+    b = torch.tensor(b).cuda()
+    previous_output = torch.tensor(previous_output["value"]).cuda()
+    
+    return torch.pow(add(a, b), previous_output).item()
 
 
 def pre_main(args):
