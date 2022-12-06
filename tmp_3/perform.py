@@ -7,5 +7,6 @@ def some_op_2(a, b, previous_output, previous_output_2):
     b = torch.tensor(b).cuda()
     previous_output = torch.tensor(previous_output["value"]).cuda()
     
+    print(1)
     
     return exp_it(torch.pow(add(a, b), previous_output).item(), previous_output_2["value"])
