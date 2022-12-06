@@ -1,25 +1,9 @@
 import argparse
+from tmp_1.perform import some_op
+from tmp_2.perform import some_op_1
+from tmp_3.perform import some_op_2
 
 from clearml import PipelineController
-
-def some_op(a, b, c):
-    import torch
-    from utils import add
-    a = torch.tensor(a).cuda()
-    b = torch.tensor(b).cuda()
-    c = torch.tensor(c).cuda()
-    return {"value": int(torch.pow(add(a, b), c).item())}
-
-
-def some_op_1(a, b, previous_output):
-    import torch
-    from utils import add
-    a = torch.tensor(a).cuda()
-    b = torch.tensor(b).cuda()
-    previous_output = torch.tensor(previous_output["value"]).cuda()
-    
-    return torch.pow(add(a, b), previous_output).item()
-
 
 def pre_main(args):
 
@@ -73,6 +57,33 @@ def pre_main(args):
         parents=["Some_1"],
         cache_executed_step=True,
     )
+
+    with open("tmp_3/docker_setup_script.sh", "r") as f:
+        s3_docker_setup_script = f.read()
+    pipline.add_function_step(
+        "Some_3",
+        some_op_2,
+        function_kwargs={
+            "a": 2,
+            "b": 2,
+            "previous_output": "${Some_1.pow_of_value}",
+            "previous_output_2": "${Some_2.new_pow}",
+        },
+        function_return="final_pow",
+        task_name=f"power_3",
+        task_type="inference",
+        packages="tmp_3/requirements.txt",
+        docker="nvidia/cuda:11.4.0-runtime-ubuntu20.04",
+        docker_args="'--ipc=host'",
+        docker_bash_setup_script=s3_docker_setup_script,
+        execution_queue="onprem.1x1080ti",
+        repo="https://github.com/kaichoulyc/tmp-clearml-pipeline",
+        repo_branch="master",
+        auto_connect_frameworks=False,
+        parents=["Some_1", "Some_2"],
+        cache_executed_step=True,
+    )
+
     pipline.start()
 
 if __name__ == "__main__":
