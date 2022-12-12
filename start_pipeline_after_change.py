@@ -78,7 +78,7 @@ def pre_main(args):
         docker_bash_setup_script=s3_docker_setup_script,
         execution_queue="onprem.1x1080ti",
         repo="https://github.com/kaichoulyc/tmp-clearml-pipeline",
-        repo_commit="ae3c4ede26ff87bb86fc2e7eba69a8182030ee63",
+        repo_commit="89012629f705f72e6ae2982d024184b754922c4e",
         auto_connect_frameworks=False,
         parents=["Some_1", "Some_2"],
         cache_executed_step=True,
