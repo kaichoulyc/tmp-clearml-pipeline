@@ -1,9 +1,17 @@
 import argparse
-from tmp_1.perform import some_op
-from tmp_2.perform import some_op_1
-from tmp_3.perform import some_op_2
-
 from clearml import PipelineController
+
+def some_op_wrapped(a, b, c):
+    from tmp_1.perform import some_op
+    return some_op(a, b, c)
+
+def some_op_1_wrapped(a, b, previous_output):
+    from tmp_2.perform import some_op_1
+    return some_op_1(a, b, previous_output)
+
+def some_op_2_wrapped(a, b, previous_output, previous_output_2):
+    from tmp_3.perform import some_op_2
+    return some_op_2(a, b, previous_output, previous_output_2)
 
 def pre_main(args):
 
@@ -13,7 +21,7 @@ def pre_main(args):
         s1_docker_setup_script = f.read()
     pipline.add_function_step(
         "Some_1",
-        some_op,
+        some_op_wrapped,
         function_kwargs={
             "a": args.value,
             "b": 2,
@@ -37,7 +45,7 @@ def pre_main(args):
         s2_docker_setup_script = f.read()
     pipline.add_function_step(
         "Some_2",
-        some_op_1,
+        some_op_1_wrapped,
         function_kwargs={
             "a": 2,
             "b": 2,
@@ -62,7 +70,7 @@ def pre_main(args):
         s3_docker_setup_script = f.read()
     pipline.add_function_step(
         "Some_3",
-        some_op_2,
+        some_op_2_wrapped,
         function_kwargs={
             "a": 2,
             "b": 2,
