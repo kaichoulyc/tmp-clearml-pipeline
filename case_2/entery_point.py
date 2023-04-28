@@ -27,7 +27,7 @@ class SecondStart(Thread):
 
     def create_task(self):
         task = Task.create(
-            project_name="Test",
+            project_name="Tests",
             task_name="test_2",
             repo="https://github.com/kaichoulyc/tmp-clearml-pipeline.git",
             commit="b9fee23fed5e157cb8764bedf1775dae3416463f",
