@@ -30,7 +30,7 @@ def main(config: dict, start_as_task):
         )
         task.connect(config)
 
-    print(config["sm_1"] + config["sm_2"])
+    print(config["sm_1"] + sum(config["sm_2"]))
 
 
 if __name__ == "__main__":
@@ -38,3 +38,5 @@ if __name__ == "__main__":
 
     with open(args.config, "r") as f:
         config = yaml.safe_load(f)
+
+    main(config=config, start_as_task=args.start_as_task)

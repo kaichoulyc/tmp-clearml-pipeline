@@ -5,9 +5,9 @@ import time
 
 class SecondStart(Thread):
     def __init__(self, changing_param):
-        super.__init__()
+        super().__init__()
 
-        self.overwrite_config = {"sm_2": changing_param}
+        self.overwrite_config = {"sm_2": [changing_param]}
 
     def overwrite_params(
         self, task: Task, overwrite_params: dict, param_prefix="General"
