@@ -30,7 +30,7 @@ class SecondStart(Thread):
             project_name="Test",
             task_name="test_2",
             repo="https://github.com/kaichoulyc/tmp-clearml-pipeline.git",
-            commit="8ce25c1c4b3d2be7575492c925fc6387be1b4c85",
+            commit="b9fee23fed5e157cb8764bedf1775dae3416463f",
             script="case_2/second_start_point.py",
             requirements_file="case_2/requirements.txt",
             docker="python:3.8",
