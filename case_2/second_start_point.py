@@ -28,6 +28,11 @@ def main(config: dict, start_as_task):
             project_name="Test",
             task_name="test_2",
         )
+
+        from clearml.backend_api.session import Session  # over here
+
+        print("check:", Session.check_min_api_version("2.23"))
+
         task.connect(config)
 
     print(config["sm_1"] + sum(config["sm_2"]))
