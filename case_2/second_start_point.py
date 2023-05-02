@@ -1,4 +1,4 @@
-from allegroai import Task
+from clearml import Task
 import yaml
 import argparse
 
