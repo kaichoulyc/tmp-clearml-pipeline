@@ -26,14 +26,14 @@ class SecondStart(Thread):
         return task
 
     def create_task(self):
-        with open("docker_setup_script.sh", "r") as f:
+        with open("case_2/docker_setup_script.sh", "r") as f:
             bash_data = f.read()
 
         task = Task.create(
             project_name="Tests",
             task_name="test_2",
             repo="https://github.com/kaichoulyc/tmp-clearml-pipeline.git",
-            commit="d660df64fb800ad04d3ce813c7226337f49029f9",
+            commit="bae2efd2ebe3549dcea83ae75aebcc8503554950",
             script="case_2/second_start_point.py",
             requirements_file="case_2/requirements.txt",
             docker="python:3.8",
