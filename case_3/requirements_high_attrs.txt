@@ -1,2 +1,2 @@
 jsonargparse==4.21.1
-attrs==21.1.0
+attrs==23.1.0
