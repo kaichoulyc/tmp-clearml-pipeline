@@ -25,7 +25,7 @@ def get_args():
 
 
 def main(args):
-    print(args)
+    print(args.dataset_ids)
 
 
 if __name__ == "__main__":
