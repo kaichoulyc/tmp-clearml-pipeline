@@ -25,15 +25,14 @@ def get_args():
 
 
 def main(args):
+    print(args)
+
+
+if __name__ == "__main__":
     task = Task.init(
         project_name="case_3",
         task_name="enter",
         task_type=Task.TaskTypes.inference,
     )
-
-    print(args)
-
-
-if __name__ == "__main__":
     args = get_args()
     main(args)
